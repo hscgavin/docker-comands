@@ -15,7 +15,7 @@ stop # Gracefully stop running container.
 kill # Stop main process in container abruptly.
 rm # Delete a stopped container.
 ```
-### Start container
+### Starting container
 ```bash
 # Create a container from an image.
 docker container create your_repo/your_image:your_tag
@@ -41,7 +41,7 @@ docker container run -i -t -p 9000:8000 --rm your_image
 # Allows you to use the terminal for other commands while your container runs.
 docker container run -d your_image
 ```
-### Check container
+### Checking container
 
 ```bash
 # List running containers. Also provides useful information about the containers.
@@ -58,7 +58,7 @@ docker container inspect your_container
 docker container logs your_container
 ```
 
-### End container
+### Ending container
 
 ```bash
 # Stop one or more running containers gracefully. Gives a default of 10 seconds before container shutdown to finish any processes.
@@ -78,7 +78,9 @@ docker container rm $(docker ps -a -q)
 ```
 
 ## Images
-`docker image xyz_command`
+
+commands for images: `docker image xyz_command`
+
 ```bash
 build # Build an image.
 push # Push an image to a remote registry.
@@ -86,4 +88,42 @@ ls # List images.
 history # See intermediate image info.
 inspect # See lots of info about an image, including the layers.
 rm # Delete an image.
+```
+
+### Building images
+
+```bash
+# Build a Docker image named my_image from the Dockerfile located at the specified path or URL.
+# -t is short for tag. Tells docker to tag the image with the provided tag which is your_tag.
+# The . (period) at the end of the command tells Docker to build the image according to the Dockerfile in the current working directory.
+docker image build -t your_repo/your_image:your_tag .
+
+# Log in to a Docker registry. Enter your username and password when prompted.
+docker login
+
+# Push an image to a registry.
+docker image push your_repo/your_image:your_tag
+```
+
+### Inspecting Images
+
+```bash
+# List your images. Shows you the size of each image, too.
+docker image ls
+
+# Display an image’s intermediate images with sizes and how they were created.
+docker image history my_image
+
+# Show lots of details about your image, including the layers that make up the image.
+docker image inspect my_image
+```
+
+### Removing Images
+
+```bash
+# Delete the specified image. If the image is stored in a remote repository, the image will still be available there.
+docker image rm you_imager
+
+# Delete all images. Careful with this one! Note that images that have been pushed to a remote registry will be preserved
+docker image rm $(docker images -a -q)
 ```
