@@ -1,4 +1,4 @@
-# docker-comands
+# docker-commands
 Docker CLI commands you should know
 
 ## Containers
